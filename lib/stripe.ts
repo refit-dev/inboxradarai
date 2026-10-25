@@ -6,7 +6,7 @@ import { getUserPlan } from "@/actions/plan";
 
 const DOMAIN = process.env.DOMAIN_URL ?? "http://localhost:3000";
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
-  apiVersion: "2024-06-20",
+  apiVersion: "2026-09-30.endive",
   typescript: true,
 });
 
@@ -87,7 +87,7 @@ export async function createStripeSession(userId: string, planSlug: string) {
   const stripeSession = await stripe.checkout.sessions.create({
     success_url: billingUrl,
     cancel_url: billingUrl,
-    payment_method_types: ["card"],
+    allowed_payment_method_types: ["card"],
     mode: "subscription",
     billing_address_collection: "auto",
     line_items: [
